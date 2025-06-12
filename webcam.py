@@ -20,7 +20,7 @@ while True:
         break
 
     # Realizar la detección sobre el frame (confianza mínima de 0.5)
-    results = model.predict(source=frame, conf=0.5, imgsz=1000, stream=True)
+    results = model.predict(source=frame, conf=0.5, imgsz=640, stream=True)
 
     # Dibujar las predicciones sobre el frame original
     for r in results:
