@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Detector de Chalecos</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <div class="left">
+      <h2>🟢 Detección en tiempo real</h2>
+      <img src="{{ url_for('video_feed') }}" id="video">
+    </div>
+    <div class="right">
+      <h2>📊 Estadísticas</h2>
+      <p id="count">Objetos detectados: 0</p>
+      <canvas id="chart"></canvas>
+    </div>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+</body>
+</html>
