@@ -1,0 +1,31 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #fef8ec; /* Fondo suave estilo crema claro */
+  color: #212529;
+}
+.custom-info-header {
+  background-color: var(--bs-primary);
+  border: 5px solid var(--bs-info-border-subtle);
+  color: white;
+  border-radius: 0.5rem;
+}
+
+#video {
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  border: 2px solid #dee2e6;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.card-header {
+  font-weight: bold;
+  font-size: 1.2rem;
+}
+
+#count {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin-bottom: 15px;
+}
