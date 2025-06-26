@@ -1,21 +1,65 @@
 const ctx = document.getElementById('chart').getContext('2d');
-const data = {
-  labels: [],
-  datasets: [{
-    label: 'Detecciones',
-    data: [],
-    borderColor: 'rgb(75, 192, 192)',
-    tension: 0.1
-  }]
-};
 
 const chart = new Chart(ctx, {
   type: 'line',
-  data: data,
+  data: {
+    labels: [],
+    datasets: [
+      {
+        label: 'Cantidad de Chalecos',
+        data: [],
+        borderColor: 'blue',
+        yAxisID: 'y',
+        tension: 0.3,
+        fill: false,
+        pointRadius: 2
+      },
+      {
+        label: 'Confianza (%)',
+        data: [],
+        borderColor: 'green',
+        yAxisID: 'y1',
+        tension: 0.3,
+        fill: false,
+        pointRadius: 2
+      }
+    ]
+  },
   options: {
+    responsive: true,
+    interaction: {
+      mode: 'index',
+      intersect: false,
+    },
+    stacked: false,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Evolución de Detecciones'
+      }
+    },
     scales: {
-      x: { title: { display: true, text: 'Tiempo' } },
-      y: { beginAtZero: true }
+      x: {
+        title: { display: true, text: 'Hora' }
+      },
+      y: {
+        type: 'linear',
+        display: true,
+        position: 'left',
+        beginAtZero: true,
+        title: { display: true, text: 'Cantidad' }
+      },
+      y1: {
+        type: 'linear',
+        display: true,
+        position: 'right',
+        beginAtZero: true,
+        max: 100,
+        title: { display: true, text: 'Confianza (%)' },
+        grid: {
+          drawOnChartArea: false
+        }
+      }
     }
   }
 });
@@ -25,8 +69,13 @@ function fetchStats() {
     .then(res => res.json())
     .then(data => {
       document.getElementById('count').textContent = "Objetos detectados: " + data.count;
-      chart.data.labels = data.history.map(d => d.timestamp);
-      chart.data.datasets[0].data = data.history.map(d => d.detecciones);
+      const labels = data.history.map(d => d.timestamp);
+      const detections = data.history.map(d => d.detecciones);
+      const confidence = data.history.map(d => d.confianza);
+
+      chart.data.labels = labels;
+      chart.data.datasets[0].data = detections;
+      chart.data.datasets[1].data = confidence;
       chart.update();
     });
 }
